@@ -1,0 +1,27 @@
+# Node and Angular
+node_modules/
+dist/
+.angular/
+coverage/
+
+# Java and Spring Boot
+target/
+*.class
+*.jar
+*.war
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+application-local.properties
+
+# Logs and OS files
+*.log
+.DS_Store
+Thumbs.db
