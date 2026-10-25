@@ -11,11 +11,30 @@ export const routes: Routes = [
     path: '',
     component: Layout,
     children: [
-      { path: '', component: Dashboard },
-      { path: 'policies', component: Policies },
-      { path: 'claims', component: Claims },
-      { path: 'payments', component: Payments },
+      {
+        path: '',
+        component: Dashboard,
+        data: { title: 'Dashboard' },
+      },
+      {
+        path: 'policies',
+        component: Policies,
+        data: { title: 'My Policies' },
+      },
+      {
+        path: 'claims',
+        component: Claims,
+        data: { title: 'Claims' },
+      },
+      {
+        path: 'payments',
+        component: Payments,
+        data: { title: 'Payments' },
+      },
     ],
   },
-  { path: '**', redirectTo: '' },
+  {
+    path: '**',
+    redirectTo: '',
+  },
 ];

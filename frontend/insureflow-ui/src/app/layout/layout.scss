@@ -17,12 +17,14 @@
 
 .main-content {
   min-height: 100vh;
-  margin-left: 245px;
+   margin-left: 245px;
   padding: 32px;
+  
 }
 
 .page-content {
   min-width: 0;
+  margin-left: 6rem;
 }
 
 @media (max-width: 650px) {

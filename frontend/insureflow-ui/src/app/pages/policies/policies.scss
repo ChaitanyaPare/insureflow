@@ -1,0 +1,188 @@
+
+:host {
+  display: block;
+  min-width: 0;
+  color: #1e293b;
+}
+
+.policies-page {
+  display: grid;
+  gap: 22px;
+}
+
+.page-intro {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.page-intro h2 {
+  margin: 0 0 8px;
+  font-size: 23px;
+}
+
+.page-intro p {
+  margin: 0;
+  color: #8793a6;
+  font-size: 13px;
+}
+
+.policy-count {
+  padding: 8px 12px;
+  border-radius: 20px;
+  background: #edf3ff;
+  color: #2457a7;
+  font-size: 12px;
+}
+
+.summary-card,
+.policy-panel {
+  border: 1px solid #e5eaf2;
+  border-radius: 13px;
+  background: #fff;
+}
+
+.summary-card {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  padding: 22px;
+}
+
+.summary-card div {
+  display: grid;
+  gap: 12px;
+}
+
+.summary-card div + div {
+  padding-left: 20px;
+  border-left: 1px solid #e5eaf2;
+}
+
+.summary-card span {
+  color: #8793a6;
+  font-size: 12px;
+}
+
+.summary-card strong {
+  font-size: 22px;
+}
+
+.policy-panel {
+  overflow: hidden;
+}
+
+.filters {
+  display: flex;
+  gap: 12px;
+  padding: 20px;
+  border-bottom: 1px solid #e5eaf2;
+}
+
+.filters input,
+.filters select {
+  min-width: 0;
+  padding: 11px 12px;
+  border: 1px solid #dce3ed;
+  border-radius: 8px;
+  background: #fff;
+  color: #334155;
+  font: inherit;
+  font-size: 13px;
+}
+
+.filters input {
+  flex: 1;
+}
+
+.filters select {
+  width: 170px;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  white-space: nowrap;
+}
+
+th,
+td {
+  padding: 16px;
+  border-bottom: 1px solid #edf0f5;
+  font-size: 12px;
+}
+
+th {
+  background: #f8faff;
+  color: #64748b;
+  font-weight: 600;
+}
+
+td strong,
+td small {
+  display: block;
+}
+
+td strong {
+  font-size: 12px;
+}
+
+td small {
+  margin-top: 5px;
+  color: #8793a6;
+  font-size: 11px;
+}
+
+.status {
+  display: inline-block;
+  padding: 5px 9px;
+  border-radius: 20px;
+  font-size: 11px;
+}
+
+.status.active {
+  background: #e6f8ef;
+  color: #138653;
+}
+
+.status.pending {
+  background: #fff2e6;
+  color: #b96908;
+}
+
+.status.expired {
+  background: #feecec;
+  color: #c24141;
+}
+
+.empty-state {
+  padding: 35px;
+  color: #8793a6;
+  text-align: center;
+}
+
+@media (max-width: 650px) {
+  .summary-card {
+    grid-template-columns: 1fr;
+  }
+
+  .summary-card div + div {
+    padding: 16px 0 0;
+    border-top: 1px solid #e5eaf2;
+    border-left: 0;
+  }
+
+  .filters {
+    flex-direction: column;
+  }
+
+  .filters select {
+    width: 100%;
+  }
+}

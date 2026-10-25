@@ -1,1 +1,99 @@
-<p>payments works!</p>
+<section class="payments-page">
+  <div class="page-intro">
+    <div>
+      <h2>Payment History</h2>
+      <p>Track premium payments across your insurance policies.</p>
+    </div>
+  </div>
+
+  <section class="summary-grid">
+    <article class="summary-card">
+      <span>Successful Payments</span>
+      <strong>{{ getPaymentCount('Success') }}</strong>
+    </article>
+
+    <article class="summary-card">
+      <span>Pending Payments</span>
+      <strong>{{ getPaymentCount('Pending') }}</strong>
+    </article>
+
+    <article class="summary-card">
+      <span>Failed Payments</span>
+      <strong>{{ getPaymentCount('Failed') }}</strong>
+    </article>
+
+    <article class="summary-card">
+      <span>Successful Total</span>
+      <strong>{{ formatCurrency(getSuccessfulTotal()) }}</strong>
+    </article>
+  </section>
+
+  <section class="payments-panel">
+    <div class="filters">
+      <input
+        type="search"
+        placeholder="Search transaction or policy..."
+        aria-label="Search payments"
+        [value]="searchTerm()"
+        (input)="searchTerm.set($any($event.target).value)"
+      />
+
+      <select
+        aria-label="Filter payments by status"
+        [value]="selectedStatus()"
+        (change)="selectedStatus.set($any($event.target).value)"
+      >
+        <option value="All">All statuses</option>
+        <option value="Success">Success</option>
+        <option value="Pending">Pending</option>
+        <option value="Failed">Failed</option>
+      </select>
+    </div>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Transaction ID</th>
+            <th>Policy</th>
+            <th>Amount</th>
+            <th>Payment Date</th>
+            <th>Method</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (payment of filteredPayments(); track payment.id) {
+            <tr>
+              <td>
+                <strong>{{ payment.id }}</strong>
+              </td>
+              <td>
+                <strong>{{ payment.policyName }}</strong>
+                <small>{{ payment.policyId }}</small>
+              </td>
+              <td>{{ formatCurrency(payment.amount) }}</td>
+              <td>{{ payment.paymentDate }}</td>
+              <td>{{ payment.method }}</td>
+              <td>
+                <span
+                  class="status"
+                  [class.success]="payment.status === 'Success'"
+                  [class.pending]="payment.status === 'Pending'"
+                  [class.failed]="payment.status === 'Failed'"
+                >
+                  {{ payment.status }}
+                </span>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="6" class="empty-state">No payments match your search.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+</section>

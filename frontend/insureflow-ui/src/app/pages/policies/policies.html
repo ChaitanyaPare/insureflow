@@ -1,1 +1,96 @@
-<p>policies works!</p>
+<section class="policies-page">
+  <div class="page-intro">
+    <div>
+      <h2>My Policies</h2>
+      <p>View and manage your insurance coverage.</p>
+    </div>
+    <span class="policy-count"> {{ filteredPolicies().length }} policies </span>
+  </div>
+
+  <section class="summary-card">
+    <div>
+      <span>Total Policies</span>
+      <strong>{{ policies().length }}</strong>
+    </div>
+    <div>
+      <span>Active Policies</span>
+      <strong>
+        {{ policies().filter((p) => p.status === 'Active').length }}
+      </strong>
+    </div>
+    <div>
+      <span>Total Coverage</span>
+      <strong>
+        {{
+          formatCurrency(
+            policies()
+              .filter((p) => p.status === 'Active')
+              .reduce((total, p) => total + p.coverage, 0)
+          )
+        }}
+      </strong>
+    </div>
+  </section>
+
+  <section class="policy-panel">
+    <div class="filters">
+      <input
+        type="search"
+        placeholder="Search by policy name, ID or type..."
+        aria-label="Search policies"
+        [value]="searchTerm()"
+        (input)="searchTerm.set($any($event.target).value)"
+      />
+
+      <select
+        aria-label="Filter by policy status"
+        [value]="selectedStatus()"
+        (change)="selectedStatus.set($any($event.target).value)"
+      >
+        <option value="All">All statuses</option>
+        <option value="Active">Active</option>
+        <option value="Pending">Pending</option>
+        <option value="Expired">Expired</option>
+      </select>
+    </div>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Policy</th>
+            <th>Policy ID</th>
+            <th>Coverage</th>
+            <th>Premium</th>
+            <th>Renewal Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (policy of filteredPolicies(); track policy.id) {
+            <tr>
+              <td>
+                <strong>{{ policy.name }}</strong>
+                <small>{{ policy.type }}</small>
+              </td>
+              <td>{{ policy.id }}</td>
+              <td>{{ formatCurrency(policy.coverage) }}</td>
+              <td>{{ formatCurrency(policy.premium) }}</td>
+              <td>{{ policy.renewalDate }}</td>
+              <td>
+                <span class="status" [class]="'status ' + policy.status.toLowerCase()">
+                  {{ policy.status }}
+                </span>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="6" class="empty-state">No policies match your search.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+</section>

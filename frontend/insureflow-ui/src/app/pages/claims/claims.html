@@ -1,1 +1,109 @@
-<p>claims works!</p>
+<section class="claims-page">
+  <div class="page-intro">
+    <div>
+      <h2>My Claims</h2>
+      <p>Track your insurance claims and their latest status.</p>
+    </div>
+
+    <button class="primary-button" type="button" (click)="showNewClaimMessage()">
+      + New Claim
+    </button>
+  </div>
+
+  <section class="summary-grid">
+    <article class="summary-card">
+      <span>Total Claims</span>
+      <strong>{{ claims().length }}</strong>
+    </article>
+
+    <article class="summary-card">
+      <span>Under Review</span>
+      <strong>{{ getClaimCount('Under Review') }}</strong>
+    </article>
+
+    <article class="summary-card">
+      <span>Approved</span>
+      <strong>{{ getClaimCount('Approved') }}</strong>
+    </article>
+
+    <article class="summary-card">
+      <span>Submitted</span>
+      <strong>{{ getClaimCount('Submitted') }}</strong>
+    </article>
+  </section>
+
+  <section class="claims-panel">
+    <div class="filters">
+      <input
+        type="search"
+        placeholder="Search claim ID, policy or claim type..."
+        aria-label="Search claims"
+        [value]="searchTerm()"
+        (input)="searchTerm.set($any($event.target).value)"
+      />
+
+      <select
+        aria-label="Filter claims by status"
+        [value]="selectedStatus()"
+        (change)="selectedStatus.set($any($event.target).value)"
+      >
+        <option value="All">All statuses</option>
+        <option value="Submitted">Submitted</option>
+        <option value="Under Review">Under Review</option>
+        <option value="Approved">Approved</option>
+        <option value="Rejected">Rejected</option>
+      </select>
+    </div>
+
+    @if (notice()) {
+      <p class="notice" role="status">{{ notice() }}</p>
+    }
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Claim</th>
+            <th>Policy</th>
+            <th>Claim Type</th>
+            <th>Claim Amount</th>
+            <th>Submitted</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (claim of filteredClaims(); track claim.id) {
+            <tr>
+              <td>
+                <strong>{{ claim.id }}</strong>
+              </td>
+              <td>
+                <strong>{{ claim.policyName }}</strong>
+                <small>{{ claim.policyId }}</small>
+              </td>
+              <td>{{ claim.claimType }}</td>
+              <td>{{ formatCurrency(claim.amount) }}</td>
+              <td>{{ claim.submittedDate }}</td>
+              <td>
+                <span
+                  class="status"
+                  [class.under-review]="claim.status === 'Under Review'"
+                  [class.approved]="claim.status === 'Approved'"
+                  [class.submitted]="claim.status === 'Submitted'"
+                  [class.rejected]="claim.status === 'Rejected'"
+                >
+                  {{ claim.status }}
+                </span>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="6" class="empty-state">No claims match your search.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+</section>
