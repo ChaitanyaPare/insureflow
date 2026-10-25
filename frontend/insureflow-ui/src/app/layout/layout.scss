@@ -1,0 +1,33 @@
+
+:host {
+  display: block;
+  min-height: 100vh;
+  color: #1e293b;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.app-shell {
+  min-height: 100vh;
+  background: #f5f7fb;
+}
+
+.main-content {
+  min-height: 100vh;
+  margin-left: 245px;
+  padding: 32px;
+}
+
+.page-content {
+  min-width: 0;
+}
+
+@media (max-width: 650px) {
+  .main-content {
+    margin-left: 0;
+    padding: 18px;
+  }
+}

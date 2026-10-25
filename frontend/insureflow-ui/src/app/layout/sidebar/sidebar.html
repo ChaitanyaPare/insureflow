@@ -1,0 +1,37 @@
+<aside class="sidebar">
+  <div class="brand">
+    <span class="brand-icon">I</span>
+    <span>InsureFlow</span>
+  </div>
+
+  <p class="menu-label">WORKSPACE</p>
+
+  <nav class="navigation" aria-label="Main navigation">
+    <a
+      routerLink="/"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="nav-item"
+    >
+      <span>▦</span> Dashboard
+    </a>
+
+    <a routerLink="/policies" routerLinkActive="active" class="nav-item">
+      <span>▤</span> My Policies
+    </a>
+
+    <a routerLink="/claims" routerLinkActive="active" class="nav-item"> <span>▧</span> Claims </a>
+
+    <a routerLink="/payments" routerLinkActive="active" class="nav-item">
+      <span>⇄</span> Payments
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="avatar">CP</div>
+    <div>
+      <strong>Chaitanya Pare</strong>
+      <small>Customer Account</small>
+    </div>
+  </div>
+</aside>
